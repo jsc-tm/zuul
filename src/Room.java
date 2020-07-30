@@ -15,11 +15,11 @@
 
 public class Room
 {
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
+    private String description;
+    private Room northExit;
+    private Room southExit;
+    private Room eastExit;
+    private Room westExit;
 
     /**
      * Create a room described "description". Initially, it has
@@ -30,6 +30,14 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
+    }
+
+    public Room getExit(String direction) {
+        if (direction.equals("north")) return northExit;
+        if (direction.equals("east")) return eastExit;
+        if (direction.equals("south")) return southExit;
+        if (direction.equals("west")) return westExit;
+        return null;
     }
 
     /**
@@ -60,4 +68,24 @@ public class Room
         return description;
     }
 
+    /**
+     * @return string met alle aanwezige uitgangen
+    bvb. "Exits: north west".
+     */
+    public String getExitString() {
+        String returnString = "Exits: ";
+        if(this.getExit("north") != null) {
+            returnString += "north ";
+        }
+        if(this.getExit("east") != null) {
+            returnString += "east ";
+        }
+        if(this.getExit("south") != null) {
+            returnString += "south ";
+        }
+        if(this.getExit("west") != null) {
+            returnString += "west ";
+        }
+        return returnString;
+    }
 }

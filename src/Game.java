@@ -32,6 +32,7 @@ public class Game {
      */
     private void createRooms() {
         Room outside, theater, pub, lab, office, cellar;
+        Item promoBoard, ashtray;
 
         // create the rooms
         outside = new Room("outside the main entrance of the university");
@@ -41,8 +42,14 @@ public class Game {
         office = new Room("in the computing admin office");
         cellar = new Room("in the cellar");
 
+        // create the items
+        promoBoard = new Item("University promoboard", 2.3);
+        ashtray = new Item("Big yellow ashtray", 4.6);
+
         // initialise room exits
         outside.setExit("east", theater);
+        outside.addItem(promoBoard);
+        outside.addItem(ashtray);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
         theater.setExit("west", outside);

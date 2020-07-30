@@ -43,8 +43,8 @@ public class Game {
         cellar = new Room("in the cellar");
 
         // create the items
-        promoBoard = new Item("University promoboard", 2.3);
-        ashtray = new Item("Big yellow ashtray", 4.6);
+        promoBoard = new Item("promoboard", "University promoboard", 2.3);
+        ashtray = new Item("ashtray", "Big yellow ashtray", 4.6);
 
         // initialise room exits
         outside.setExit("east", theater);
@@ -94,6 +94,7 @@ public class Game {
 
     private void printLocationInfo() {
         System.out.println(player.getCurrentRoom().getLongDescription());
+        System.out.println(player.getLongDescription());
         System.out.println();
     }
 
@@ -118,6 +119,10 @@ public class Game {
             look();
         } else if (commandWord.equals("eat")) {
             eat();
+        } else if (commandWord.equals("take")) {
+            take(command);
+        } else if (commandWord.equals("drop")) {
+            drop(command);
         } else if (commandWord.equals("go")) {
             goRoom(command);
         } else if (commandWord.equals("quit")) {
@@ -171,6 +176,34 @@ public class Game {
         } else {
             player.setCurrentRoom(nextRoom);
             printLocationInfo();
+        }
+    }
+
+    private void take(Command command) {
+        if (!command.hasSecondWord()) {
+            // if there is no second word, we don't know what to take...
+            System.out.println("Take what?");
+            return;
+        }
+        String itemName = command.getSecondWord();
+        if (player.take(itemName)) {
+            printLocationInfo();
+        } else {
+            System.out.println("There is no item here with the name " + itemName);
+        }
+    }
+
+    private void drop(Command command) {
+        if (!command.hasSecondWord()) {
+            // if there is no second word, we don't know what to drop...
+            System.out.println("Drop what?");
+            return;
+        }
+        String itemName = command.getSecondWord();
+        if (player.drop(itemName)) {
+            printLocationInfo();
+        } else {
+            System.out.println("There is no item here with the name " + itemName);
         }
     }
 

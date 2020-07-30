@@ -83,6 +83,24 @@ public class Room {
         return "";
     }
 
+    public boolean hasItem(String name) {
+        for (Item item : items) {
+            if (item.getName().equals(name)) return true;
+        }
+        return false;
+    }
+
+    public Item getItem(String name) {
+        for (Item item : items) {
+            if (item.getName().equals(name)) {
+                if (items.remove(item)) {
+                    return item;
+                }
+            }
+        }
+        return null;
+    }
+
     public String getLongDescription() {
         return "You are " + description + getItemsString() + "\n"  + getExitString();
     }

@@ -147,7 +147,7 @@ public class Game {
     }
 
     private void eat() {
-        System.out.println("Je hebt nu gegeten en bent niet meer hongerig\n")
+        System.out.println("Je hebt nu gegeten en bent niet meer hongerig\n");
     }
 
     /**

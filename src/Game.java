@@ -17,7 +17,7 @@
 
 public class Game {
     private Parser parser;
-    private Room currentRoom;
+    private Player player;
 
     /**
      * Create the game and initialise its internal map.
@@ -60,7 +60,7 @@ public class Game {
         office.setExit("down", cellar);
         cellar.setExit("up", office);
 
-        currentRoom = outside;  // start game outside
+        this.player = new Player("Tom", outside);
     }
 
     /**
@@ -93,7 +93,7 @@ public class Game {
     }
 
     private void printLocationInfo() {
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
         System.out.println();
     }
 
@@ -117,7 +117,7 @@ public class Game {
         } else if (commandWord.equals("look")) {
             look();
         } else if (commandWord.equals("eat")) {
-            System.out.println("Je hebt nu gegeten en bent niet meer hongerig\n");
+            eat();
         } else if (commandWord.equals("go")) {
             goRoom(command);
         } else if (commandWord.equals("quit")) {
@@ -135,15 +135,19 @@ public class Game {
      * command words.
      */
     private void printHelp() {
-        System.out.println("You are lost. You are alone. You wander");
+        System.out.println("Player " + player.getName() + " is lost and alone, and wanders");
         System.out.println("around at the university.");
         System.out.println();
-        System.out.println("Your command words are:   " + parser.showCommands());
+        System.out.println("Possible command words are:   " + parser.showCommands());
         System.out.println();
     }
 
     private void look() {
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
+    }
+
+    private void eat() {
+        System.out.println("Je hebt nu gegeten en bent niet meer hongerig\n")
     }
 
     /**
@@ -160,12 +164,12 @@ public class Game {
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = player.getCurrentRoom().getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
         } else {
-            currentRoom = nextRoom;
+            player.setCurrentRoom(nextRoom);
             printLocationInfo();
         }
     }

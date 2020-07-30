@@ -117,7 +117,7 @@ public class Game {
         } else if (commandWord.equals("look")) {
             look();
         } else if (commandWord.equals("eat")) {
-            System.out.println("Je hebt nu gegeten en bent niet meer hongerig\n");
+            eat();
         } else if (commandWord.equals("go")) {
             goRoom(command);
         } else if (commandWord.equals("quit")) {
@@ -144,6 +144,10 @@ public class Game {
 
     private void look() {
         System.out.println(currentRoom.getLongDescription());
+    }
+
+    private void eat() {
+        System.out.println("Je hebt nu gegeten en bent niet meer hongerig\n");
     }
 
     /**

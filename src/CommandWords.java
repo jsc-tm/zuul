@@ -21,13 +21,11 @@ public class CommandWords {
     /*** Constructor - initialise the command words.*/
     public CommandWords() {
         validCommands = new HashMap<String, CommandWord>();
-        validCommands.put("go", CommandWord.GO);
-        validCommands.put("look", CommandWord.LOOK);
-        validCommands.put("take", CommandWord.TAKE);
-        validCommands.put("drop", CommandWord.DROP);
-        validCommands.put("eat", CommandWord.EAT);
-        validCommands.put("help", CommandWord.HELP);
-        validCommands.put("quit", CommandWord.QUIT);
+        for (CommandWord command : CommandWord.values()) {
+            if (command != CommandWord.UNKNOWN) {
+                validCommands.put(command.toString(), command);
+            }
+        }
     }
 
     /**

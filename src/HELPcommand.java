@@ -1,14 +1,13 @@
-public class HelpCommand extends Command
+public class HELPcommand extends Command
 {
-    private CommandWords commandWords;
+    private String commandWords;
 
     /**
      * Constructor for objects of class HelpCommand
      */
-    public HelpCommand(CommandWord firstWord, String secondWord, CommandWords words)
+    public HELPcommand(CommandWord firstWord, String secondWord, String words)
     {
-        super(firstWord, secondWord);
-        commandWords = words;
+        super(firstWord, secondWord, words);
     }
 
     /**
@@ -18,11 +17,11 @@ public class HelpCommand extends Command
      */
     public boolean execute(Player player)
     {
-        System.out.println("You are lost. You are alone. You wander");
+        System.out.println("Player " + player.getName() + " is lost and alone, and wanders");
         System.out.println("around at the university.");
         System.out.println();
-        System.out.println("Your command words are:");
-        commandWords.showAll();
+        System.out.println("Possible command words are:   " + getCommands());
+        System.out.println();
         return false;
     }
 }

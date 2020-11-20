@@ -1,3 +1,4 @@
+import java.lang.reflect.Constructor;
 import java.util.Scanner;
 
 /**
@@ -32,7 +33,7 @@ public class Parser {
     /**
      * @return The next command from the user.
      */
-    public Command getCommand() {
+    public Command getCommand() throws Exception {
         String inputLine;   // will hold the full input line
         String word1 = null;
         String word2 = null;
@@ -54,9 +55,15 @@ public class Parser {
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
         if (commands.isCommand(word1)) {
-            return new Command(commands.getCommand(word1), word2);
+            try {
+                Class<?> cl = Class.forName(commands.getCommand(word1).name()+"command");
+                Constructor<?> con = cl.getConstructor(CommandWord.class, String.class, String.class);
+                return (Command)con.newInstance(commands.getCommand(word1), word2, commands.showAll());
+            } catch (Exception e) {
+                throw e;
+            }
         } else {
-            return new Command(CommandWord.UNKNOWN, word2);
+            return new UNKNOWNcommand(CommandWord.UNKNOWN, word2, commands.showAll());
         }
     }
 

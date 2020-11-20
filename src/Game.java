@@ -71,11 +71,15 @@ public class Game {
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-
         boolean finished = false;
-        while (!finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
+        Command command;
+        while(! finished) {
+            try {
+                command = parser.getCommand();
+                finished = command.execute(player);
+            } catch (Exception e) {
+                System.out.println("I don't understand...");
+            }
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
@@ -89,143 +93,7 @@ public class Game {
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type '" + CommandWord.HELP.toString() + "' if you need help.");
         System.out.println();
-        printLocationInfo();
-    }
-
-    private void printLocationInfo() {
-        System.out.println(player.getCurrentRoom().getLongDescription());
-        System.out.println(player.getLongDescription());
-        System.out.println();
-    }
-
-    /**
-     * Given a command, process (that is: execute) the command.
-     *
-     * @param command The command to be processed.
-     * @return true If the command ends the game, false otherwise.
-     */
-    private boolean processCommand(Command command) {
-        boolean wantToQuit = false;
-        CommandWord commandWord = command.getCommandWord();
-
-        switch (commandWord) {
-            case UNKNOWN:
-                System.out.println("I don't know what you mean...");
-                break;
-            case HELP:
-                printHelp();
-                break;
-            case LOOK:
-                look();
-                break;
-            case EAT:
-                eat();
-                break;
-            case TAKE:
-                take(command);
-                break;
-            case DROP:
-                drop(command);
-                break;
-            case GO:
-                goRoom(command);
-                break;
-            case QUIT:
-                wantToQuit = quit(command);
-                break;
-        }
-
-        return wantToQuit;
-    }
-
-    // implementations of user commands:
-
-    /**
-     * Print out some help information.
-     * Here we print some stupid, cryptic message and a list of the
-     * command words.
-     */
-    private void printHelp() {
-        System.out.println("Player " + player.getName() + " is lost and alone, and wanders");
-        System.out.println("around at the university.");
-        System.out.println();
-        System.out.println("Possible command words are:   " + parser.showCommands());
-        System.out.println();
-    }
-
-    private void look() {
-        System.out.println(player.getCurrentRoom().getLongDescription());
-    }
-
-    private void eat() {
-        System.out.println("Je hebt nu gegeten en bent niet meer hongerig\n");
-    }
-
-    /**
-     * Try to go in one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
-     */
-    private void goRoom(Command command) {
-        if (!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = player.getCurrentRoom().getExit(direction);
-
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        } else {
-            player.setCurrentRoom(nextRoom);
-            printLocationInfo();
-        }
-    }
-
-    private void take(Command command) {
-        if (!command.hasSecondWord()) {
-            // if there is no second word, we don't know what to take...
-            System.out.println("Take what?");
-            return;
-        }
-        String itemName = command.getSecondWord();
-        if (player.take(itemName)) {
-            printLocationInfo();
-        } else {
-            System.out.println("There is no item here with the name " + itemName);
-        }
-    }
-
-    private void drop(Command command) {
-        if (!command.hasSecondWord()) {
-            // if there is no second word, we don't know what to drop...
-            System.out.println("Drop what?");
-            return;
-        }
-        String itemName = command.getSecondWord();
-        if (player.drop(itemName)) {
-            printLocationInfo();
-        } else {
-            System.out.println("There is no item here with the name " + itemName);
-        }
-    }
-
-    /**
-     * "Quit" was entered. Check the rest of the command to see
-     * whether we really quit the game.
-     *
-     * @return true, if this command quits the game, false otherwise.
-     */
-    private boolean quit(Command command) {
-        if (command.hasSecondWord()) {
-            System.out.println("Quit what?");
-            return false;
-        } else {
-            return true;  // signal that we want to quit
-        }
+        player.printLocationInfo();
     }
 
     public static void main(String[] args) {

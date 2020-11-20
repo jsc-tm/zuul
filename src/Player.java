@@ -68,4 +68,10 @@ public class Player {
         }
         return desc;
     }
+
+    public void printLocationInfo() {
+        System.out.println(this.getCurrentRoom().getLongDescription());
+        System.out.println(this.getLongDescription());
+        System.out.println();
+    }
 }

@@ -1,11 +1,11 @@
-public class QuitCommand extends Command
+public class QUITcommand extends Command
 {
     /**
      * Constructor for objects of class QuitCommand
      */
-    public QuitCommand(CommandWord firstWord, String secondWord)
+    public QUITcommand(CommandWord firstWord, String secondWord, String words)
     {
-        super(firstWord, secondWord);
+        super(firstWord, secondWord, words);
     }
 
     /**
@@ -15,7 +15,7 @@ public class QuitCommand extends Command
      */
     public boolean execute(Player player)
     {
-        if(getSecondWord() == null) {
+        if(!hasSecondWord()) {
             return true;
         }
         else {

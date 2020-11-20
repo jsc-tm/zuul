@@ -3,9 +3,9 @@ public class GOcommand extends Command
     /**
      * Constructor for objects of class GoCommand
      */
-    public GOcommand(CommandWord firstWord, String secondWord, String words)
+    public GOcommand(CommandWord firstWord, String secondWord)
     {
-        super(firstWord, secondWord, words);
+        super(firstWord, secondWord);
     }
 
     /**

@@ -5,9 +5,15 @@ public class HELPcommand extends Command
     /**
      * Constructor for objects of class HelpCommand
      */
-    public HELPcommand(CommandWord firstWord, String secondWord, String words)
+    public HELPcommand(CommandWord firstWord, String secondWord)
     {
-        super(firstWord, secondWord, words);
+        super(firstWord, secondWord);
+        commandWords = "";
+        for (CommandWord command : CommandWord.values()) {
+            if (command != CommandWord.UNKNOWN) {
+                commandWords += command.toString() + " ";
+            }
+        }
     }
 
     /**
@@ -20,7 +26,7 @@ public class HELPcommand extends Command
         System.out.println("Player " + player.getName() + " is lost and alone, and wanders");
         System.out.println("around at the university.");
         System.out.println();
-        System.out.println("Possible command words are:   " + getCommands());
+        System.out.println("Possible command words are:   " + commandWords);
         System.out.println();
         return false;
     }

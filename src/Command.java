@@ -19,7 +19,6 @@
 
 public abstract class Command
 {
-    private String commands;
     private CommandWord commandWord;
     private String secondWord;
 
@@ -30,9 +29,8 @@ public abstract class Command
      *                  was not recognised.
      * @param secondWord The second word of the command.
      */
-    public Command(CommandWord firstWord, String secondWord, String commands)
+    public Command(CommandWord firstWord, String secondWord)
     {
-        this.commands = commands;
         commandWord = firstWord;
         this.secondWord = secondWord;
     }
@@ -55,8 +53,6 @@ public abstract class Command
     {
         return secondWord;
     }
-
-    protected String getCommands() { return commands; }
 
     /**
      * @return true if this command was not understood.

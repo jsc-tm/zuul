@@ -3,9 +3,9 @@ public class QUITcommand extends Command
     /**
      * Constructor for objects of class QuitCommand
      */
-    public QUITcommand(CommandWord firstWord, String secondWord, String words)
+    public QUITcommand(CommandWord firstWord, String secondWord)
     {
-        super(firstWord, secondWord, words);
+        super(firstWord, secondWord);
     }
 
     /**

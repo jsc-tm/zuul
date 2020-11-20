@@ -1,6 +1,6 @@
 public enum CommandWord {
     GO("go"), LOOK("look"), TAKE("take"), DROP("drop"), EAT("eat"), QUIT("quit"),
-    HELP("?"), UNKNOWN("?");
+    HELP("?"), UNKNOWN("-");
 
     private String commandString;
 
@@ -10,5 +10,9 @@ public enum CommandWord {
 
     public String toString() {
         return commandString;
+    }
+
+    public String getCommandClassName() {
+        return this.name() + "command";
     }
 }

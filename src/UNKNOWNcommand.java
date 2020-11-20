@@ -1,7 +1,7 @@
 public class UNKNOWNcommand extends Command {
-    public UNKNOWNcommand(CommandWord firstWord, String secondWord, String words)
+    public UNKNOWNcommand(CommandWord firstWord, String secondWord)
     {
-        super(firstWord, secondWord, words);
+        super(firstWord, secondWord);
     }
 
     @Override

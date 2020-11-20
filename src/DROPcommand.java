@@ -1,7 +1,7 @@
 public class DROPcommand extends Command {
-    public DROPcommand(CommandWord firstWord, String secondWord, String words)
+    public DROPcommand(CommandWord firstWord, String secondWord)
     {
-        super(firstWord, secondWord, words);
+        super(firstWord, secondWord);
     }
 
     /**

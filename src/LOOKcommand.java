@@ -1,7 +1,7 @@
 public class LOOKcommand extends Command {
-    public LOOKcommand(CommandWord firstWord, String secondWord, String words)
+    public LOOKcommand(CommandWord firstWord, String secondWord)
     {
-        super(firstWord, secondWord, words);
+        super(firstWord, secondWord);
     }
 
     public boolean execute(Player player)

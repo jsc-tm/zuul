@@ -55,19 +55,16 @@ public class Parser {
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
         if (commands.isCommand(word1)) {
+            CommandWord commandWord = commands.getCommand(word1);
             try {
-                Class<?> cl = Class.forName(commands.getCommand(word1).name()+"command");
-                Constructor<?> con = cl.getConstructor(CommandWord.class, String.class, String.class);
-                return (Command)con.newInstance(commands.getCommand(word1), word2, commands.showAll());
+                Class<?> cl = Class.forName(commandWord.getCommandClassName());
+                Constructor<?> con = cl.getConstructor(CommandWord.class, String.class);
+                return (Command)con.newInstance(commands.getCommand(word1), word2);
             } catch (Exception e) {
                 throw e;
             }
         } else {
-            return new UNKNOWNcommand(CommandWord.UNKNOWN, word2, commands.showAll());
+            return new UNKNOWNcommand(CommandWord.UNKNOWN, word2);
         }
-    }
-
-    public String showCommands() {
-        return commands.showAll();
     }
 }

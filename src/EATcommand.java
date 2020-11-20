@@ -1,7 +1,7 @@
 public class EATcommand extends Command {
-    public EATcommand(CommandWord firstWord, String secondWord, String words)
+    public EATcommand(CommandWord firstWord, String secondWord)
     {
-        super(firstWord, secondWord, words);
+        super(firstWord, secondWord);
     }
 
     /**

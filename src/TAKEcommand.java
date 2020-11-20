@@ -1,7 +1,7 @@
 public class TAKEcommand extends Command {
-    public TAKEcommand(CommandWord firstWord, String secondWord, String words)
+    public TAKEcommand(CommandWord firstWord, String secondWord)
     {
-        super(firstWord, secondWord, words);
+        super(firstWord, secondWord);
     }
 
     /**

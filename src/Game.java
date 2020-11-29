@@ -74,12 +74,8 @@ public class Game {
         boolean finished = false;
         Command command;
         while(! finished) {
-            try {
-                command = parser.getCommand();
-                finished = command.execute(player);
-            } catch (Exception e) {
-                System.out.println("I don't understand...");
-            }
+            command = parser.getCommand();
+            finished = command.execute(player);
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
